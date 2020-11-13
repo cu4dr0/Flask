@@ -1,5 +1,4 @@
 from flask_restful import reqparse, Resource
-import sqlite3 as sqlite 
 from flask_jwt import jwt_required
 
 from models.item import Item

@@ -1,4 +1,3 @@
-import sqlite3 as sqlite
 from db import db
 
 class User(db.Model):
