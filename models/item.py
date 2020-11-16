@@ -9,6 +9,7 @@ class Item(db.Model):
 
 	store_id = db.Column(db.Integer, db.ForeignKey("stores.id")) #the table
 	store = db.relationship("Store") #the class name 
+
 	def __init__(self, name, price, store_id):
 		self.name = name
 		self.price = price
@@ -16,6 +17,7 @@ class Item(db.Model):
 
 	def json(self):
 		return {"name":self.name, "price":self.price}
+		
 	@classmethod
 	def findByName(cls, name):
 		return cls.query.filter_by(name=name).first() #SELECT * FROM items WHERE name = name LIMIT 1

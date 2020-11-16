@@ -14,7 +14,7 @@ class Items(Resource):
 		item = Item.findByName(name)
 		if item:
 			return item.json()
-		return {"message":"item {} not found".format(name)}
+		return {"message":"item {} not found".format(name)},404
 
 	def post(self, name):
 		if Item.findByName(name):
@@ -44,17 +44,14 @@ class Items(Resource):
 		item = Item.findByName(name)
 
 		if item: #if item is not None
-			try:
-				item.price = requestedData["price"]
-				item.store_id = requestedData["store_id"]
-			except:
-				return {"message":"something went wrong with updating your existing item, try again later"},500
+			item.price = requestedData["price"]
+			item.store_id = requestedData["store_id"]
 		else:
-			try:
 				item = Item(name,**requestedData)#or requestedData["price"], requestedData["store_id"]
-			except:
-				return {"message":"something went wrong with creating your new item, try again later"},500
-		item.saveToDB()
+		try: 
+			item.saveToDB()
+		except:
+			return {"message":"something went wrong with updating your new item, try again later"},500
 		return item.json(),201
 
 

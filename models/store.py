@@ -10,8 +10,10 @@ class Store(db.Model):
 
 	def __init__(self, name):
 		self.name = name
+
 	def json(self):
 		return {"name":self.name, "items":[item.json() for item in self.items.all()]}
+		
 	@classmethod
 	def findByName(cls, name):
 		return cls.query.filter_by(name=name).first() #SELECT * FROM items WHERE name = name LIMIT 1
