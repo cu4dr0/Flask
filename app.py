@@ -12,7 +12,7 @@ from resources.stores import Stores, StoreList
 
 from datetime import timedelta
 
-from db import db
+
 
 app = Flask(__name__)
 app.secret_key = "lordericktodopoderosocreadordeloscielosymares" 
@@ -45,5 +45,6 @@ api.add_resource(registerUser, "/register")
 
 
 if __name__ == "__main__": 
+	from db import db
 	db.init_app(app)
 	app.run(port = 5000, debug= True)
